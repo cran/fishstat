@@ -4,7 +4,7 @@
 #'
 #' @title Countries
 #'
-#' @description Countries and various territories, defined by FAO (2024).
+#' @description Countries and various territories, defined by FAO (2025).
 #'
 #' @usage
 #' country
@@ -28,7 +28,7 @@
 #' facilitate quick exploration and plotting in R.
 #'
 #' @source
-#' FAO (2024).
+#' FAO (2025).
 #' Global Production.
 #' Fisheries and Aquaculture Division. Rome.
 #'
@@ -50,16 +50,16 @@
 #' # Regions within continents
 #' table(country$georegion, country$continent)
 #'
-#' # 240 'country' entries have non-zero production, 35 have no production
+#' # Select 'country' entries that have non-zero production
 #' nonzero <- unique(production$country[production$value > 0])
 #' country.nz <- country[country$country %in% nonzero,]
-#' country$country_name[!(country$country %in% nonzero)]
+#' length(country.nz$country)
 #'
 #' # Only 'country' and 'country_name' are always defined
-#' cbind(sapply(country, function(x) all(x!="")))
+#' cbind(sapply(country, function(x) all(x != "")))
 #'
 #' # Plus 'ecoclass' and 'official' for non-zero production
-#' cbind(sapply(country.nz, function(x) all(x!="")))
+#' cbind(sapply(country.nz, function(x) all(x != "")))
 #'
 #' # Economic class levels
 #' sort(unique(country$ecoclass))

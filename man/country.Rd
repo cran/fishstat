@@ -18,7 +18,7 @@ Data frame containing eight columns:
 }
 }
 \source{
-FAO (2024).
+FAO (2025).
 Global Production.
 Fisheries and Aquaculture Division. Rome.
 
@@ -28,7 +28,7 @@ Fisheries and Aquaculture Division. Rome.
 country
 }
 \description{
-Countries and various territories, defined by FAO (2024).
+Countries and various territories, defined by FAO (2025).
 }
 \details{
 This data frame contains the full set of 275 data records from the FishStat
@@ -41,16 +41,16 @@ head(country)
 # Regions within continents
 table(country$georegion, country$continent)
 
-# 240 'country' entries have non-zero production, 35 have no production
+# Select 'country' entries that have non-zero production
 nonzero <- unique(production$country[production$value > 0])
 country.nz <- country[country$country \%in\% nonzero,]
-country$country_name[!(country$country \%in\% nonzero)]
+length(country.nz$country)
 
 # Only 'country' and 'country_name' are always defined
-cbind(sapply(country, function(x) all(x!="")))
+cbind(sapply(country, function(x) all(x != "")))
 
 # Plus 'ecoclass' and 'official' for non-zero production
-cbind(sapply(country.nz, function(x) all(x!="")))
+cbind(sapply(country.nz, function(x) all(x != "")))
 
 # Economic class levels
 sort(unique(country$ecoclass))

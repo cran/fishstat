@@ -18,7 +18,7 @@ Data frame containing eight columns:
 }
 }
 \source{
-FAO (2024).
+FAO (2025).
 Global Production.
 Fisheries and Aquaculture Division. Rome.
 
@@ -29,10 +29,10 @@ production
 }
 \description{
 Aquaculture and capture production quantity by species, area, and country for
-the years 1950-2022, compiled and published by FAO (2024).
+the years 1950-2023, compiled and published by FAO (2025).
 }
 \details{
-This data frame contains the full set of 1,152,461 data records from the
+This data frame contains the full set of 1,159,613 data records from the
 FishStat \emph{Production Quantity} data table. Column names have been
 simplified to facilitate quick exploration and plotting in R.
 }
@@ -44,7 +44,8 @@ prod <- production[production$measure == "Q_tlw" & production$value > 0,]
 prod <- merge(prod, species[c("species", "yearbook")])
 
 # Select SOFIA species, excluding mammals, reptiles, and plants
-prod <- prod[prod$yearbook == "Fish, crustaceans and molluscs, etc.",]
+prod <- prod[prod$yearbook ==
+             "Aquatic animals (Fish, crustaceans and molluscs, etc.)",]
 
 # Determine origin
 prod <- merge(prod, area[c("area", "inlandmarine")])

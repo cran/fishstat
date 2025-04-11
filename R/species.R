@@ -4,7 +4,7 @@
 #'
 #' @title Species
 #'
-#' @description Aquatic species and taxonomic groups, defined by FAO (2024).
+#' @description Aquatic species and taxonomic groups, defined by FAO (2025).
 #'
 #' @usage
 #' species
@@ -25,12 +25,12 @@
 #' }
 #'
 #' @details
-#' This data frame contains the full set of 13,615 data records from the
+#' This data frame contains the full set of 13,596 data records from the
 #' FishStat \emph{Species Groups} data table. Column names have been simplified
 #' to facilitate quick exploration and plotting in R.
 #'
 #' @source
-#' FAO (2024).
+#' FAO (2025).
 #' Global Production.
 #' Fisheries and Aquaculture Division. Rome.
 #'
@@ -49,26 +49,26 @@
 #' @examples
 #' head(species, 3)
 #'
-#' # 3524 'species' entries have non-zero production, 9893 have no production
+#' # Select 'species' entries that have non-zero production
 #' nonzero <- unique(production$species[production$value > 0])
 #' species.nz <- species[species$species %in% nonzero,]
-#' length(unique(species.nz$species))
+#' length(species.nz$species)
 #'
 #' # Only 'species', 'scientific', 'major', and 'taxonomic' are always defined
-#' cbind(sapply(species, function(x) all(x!="")))
+#' cbind(sapply(species, function(x) all(x != "")))
 #'
 #' # Plus 'isscaap' and 'yearbook' for non-zero production
-#' cbind(sapply(species.nz, function(x) all(x!="")))
+#' cbind(sapply(species.nz, function(x) all(x != "")))
 #'
 #' # A variety of species are missing 'species_name', 'cpc_class', 'cpc_group'
 #' cbind(table(species.nz$major[species.nz$species_name == ""]))
 #' cbind(table(species.nz$major[species.nz$cpc_class == ""]))
 #' cbind(table(species.nz$major[species.nz$cpc_group == ""]))
 #'
-#' # 3524 non-zero production species by major taxa
+#' # Number of 'species' entries that have non-zero production by major taxa
 #' cbind(table(species.nz$major))
 #'
-#' # 3524 species in 7 major taxa, 50 isscaap groups, and 3 yearbook categories
+#' # 7 major taxa, 50 isscaap groups, and 3 yearbook categories
 #' cbind(sapply(species.nz, function(x) length(unique(x))))
 #'
 #' # 'scientific' and 'species_name' entries are not unique
@@ -76,8 +76,9 @@
 #' table(species.nz$species_name)[table(species.nz$species_name) > 1]
 #'
 #' # A closer look at the yearbook categories
-#' cbind(table(species.nz$yearbook))  # now inspect the 149 "other" species
-#' other <- species.nz[species.nz$yearbook == "Other aq. animals & products",]
+#' cbind(table(species.nz$yearbook))  # now inspect the "other" species
+#' other <-
+#'   species.nz[species.nz$yearbook == "Other aquatic animals & products",]
 #' cbind(table(other$major))  # majority is mammals, what about the rest
 #' other <- other[other$major != "MAMMALIA",]
 #' cbind(table(other$isscaap))  # reptiles and inedible ornamental animals
